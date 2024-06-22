@@ -33,7 +33,7 @@
                 <span>
                     <a><i class="fa-solid fa-cart-shopping shpcart" id="shpcart"></i></a>
                     <a href="../Login/login.html"><i class="fa-regular fa-user"></i></a>
-                    <i class="fa-solid fa-bars" id="bars"></i>
+                    <i class="fa-solid fa-bars menubars" id="bars"></i>
                 </span>
             </div>
         </nav>
@@ -456,6 +456,18 @@ document.querySelector(".close").addEventListener("click", () => {
     const cart = document.querySelector('.side');
     cart.style.display = "none";
 });
+
+        document.querySelector(".removemenu").addEventListener("click", () => {
+    const menu = document.querySelector(".menu");
+    menu.style.display= "none";
+});
+
+document.querySelector(".menubars").addEventListener("click", () => {
+    const menu = document.querySelector(".menu");
+    menu.style.display= "block";
+});
+
+
      
     </script>
 
