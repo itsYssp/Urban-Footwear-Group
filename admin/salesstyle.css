@@ -1,0 +1,185 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+
+
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: #000000;
+    margin: 0;
+    background: url(../images/shopbg.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+
+}
+
+#header {
+    width: 100%;
+    background-color: #222831;
+}
+.side {
+    display: none;
+}
+nav {
+    width: 100%;
+    height: 80px;
+    padding: 0 40px;
+    background-color: grey;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+    z-index: 2;
+    position: fixed;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.85);
+    overflow: hidden;
+    left: 0;
+}
+
+.logo-container,
+.icons {
+    flex-basis: 20%;
+}
+
+.nav-links {
+    flex-basis: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav img {
+    width: 100px;
+    height: 70px;
+
+}
+
+nav ul li {
+    display: inline-block;
+    list-style: none;
+    margin: 0 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    font-weight: 400px;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+}
+
+ul li a::after {
+    content: '';
+    width: 0;
+    height: 3px;
+    background-color: white;
+    left: 0;
+    bottom: -6px;
+    position: absolute;
+    transition: 0.5s;
+
+}
+
+ul li a:hover::after {
+    width: 100%;
+}
+
+
+#remove,
+#bars {
+    display: none;
+}
+
+.side-nav {
+    display: flex;
+    justify-content: space-between;
+    flex-basis: 20%;
+
+}
+
+span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+span a {
+    color: white;
+    margin: 0 5px;
+    padding: 0 10px;
+    font-size: 40px;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: 0.2s;
+    border-radius: 5px;
+}
+
+span a:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+
+@media only screen and (min-width: 600px) and  (max-width: 1024px){
+    span a {
+        font-size: 30px;
+    }
+
+    nav {
+        padding: 0 20px;
+
+    }
+
+    nav ul {
+        background-color: #151515;
+        width: 200px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        right: 0;
+        padding-top: 50px;
+        display: none;
+        z-index: 2;
+        transition: 0.5s;
+    }
+
+    nav ul li {
+        margin: 20px;
+        width: 100%;
+    }
+
+    .nav-links ul li a {
+        margin: 50px 0;
+
+    }
+
+    #remove {
+        color: white;
+        top: 25px;
+        left: 25px;
+        position: absolute;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    #bars {
+        display: block;
+        color: white;
+        font-size: 30px;
+        margin-left: 10px;
+
+
+    }
+    
+}

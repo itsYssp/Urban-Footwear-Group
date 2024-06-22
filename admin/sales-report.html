@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoe Store - Sales Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../style.css">
+    <script src="chart.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <section id="header">
+        <nav>
+            <div class="logo-container">
+                <img src="../images/lg.png">
+            </div>
+            <div class="nav-links">
+                <ul class="menu">
+                    <li><a href="admin.html#home">Home</a></li>
+                    <li><a href="admin.html#shop">Shop</a></li>
+                    <li><a href="admin.html#offers">Offers</a></li>
+                    <li><a href="admin.htmlabout">About</a></li>
+                    <li><a href="admin.html#contact">Contact</a></li>
+                    <li class="admin-dashboard"><a href="" >Dashboard</a></li>
+                    <i class="fa-solid fa-arrow-left removemenu" id="remove"></i>
+                </ul>
+            </div>
+            <div class="icons">
+                <span>
+                    <a><i class="fa-solid fa-cart-shopping shpcart" id="shpcart"></i></a>
+                    <a href="../Login/login.html"><i class="fa-regular fa-user"></i></a>
+                    <i class="fa-solid fa-bars" id="bars"></i>
+                </span>
+            </div>
+        </nav>
+    </section>
+    <div class="charts">
+    <!-- Monthly Sales Report Section -->
+    <section class="sales-report py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Monthly Sales Report</h2>
+            <canvas id="salesChart" width="400" height="200"></canvas>
+        </div>
+    </section>
+
+    <script>
+        
+    </script>
+
+    <!-- Annual Sales Report Section -->
+    <section class="annual-sales-report py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Annual Sales Report</h2>
+            <canvas id="annualSalesChart" width="400" height="200"></canvas>
+        </div>
+    </section>
+    </div>
+    <section class="side">
+        <div class="cart-container">
+            <h2>CART</h2>
+            <div class="cart-product-container"> 
+            <div class="cart">
+                <!-- Items will be dynamically inserted here -->
+            </div>
+            </div>
+            <p class="total">Total Price of All Items: ₱<span id="total-price"></span></p>
+            <button class="clear" onclick="resetCart()">Reset Cart</button>
+
+            <div class="cart-buttons">
+                <div class="close" id="close">
+                    <button>CLOSE</button>
+                </div>
+                <div class="checkout">
+                    <a href="checkout.html"><button>CHECK OUT</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        var ctx = document.getElementById('salesChart').getContext('2d');
+var salesChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [
+            {
+                label: 'Monthly Sales',
+                data: [12000, 19000, 3000, 5000, 20000, 30000, 45000],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }
+        ]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+var ctxAnnual = document.getElementById('annualSalesChart').getContext('2d');
+var annualSalesChart = new Chart(ctxAnnual, {
+    type: 'line',
+    data: {
+        labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
+        datasets: [
+            {
+                label: 'Annual Sales',
+                data: [120000, 190000, 300000, 500000, 200000, 300000],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+                fill: false
+            }
+        ]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const cart = JSON.parse(localStorage.getItem('admincart')) || [];
+    let totalPrice = 0;
+
+    if (cart.length > 0) {
+        cart.forEach((item, index) => {
+            const itemDiv = document.createElement('div');
+            itemDiv.innerHTML = `
+                <img src="${item.imageSrc}" alt="Product Image">
+                <div class="price-size">
+                <p> Name: ${item.name}</p>
+                <p>Price: ₱<span>${item.price}</span></p>
+                <p>Size: <span>${item.size}</span></p>
+                </div>
+            `;
+            document.querySelector('.cart').appendChild(itemDiv);
+            totalPrice += parseFloat(item.price);
+        });
+        document.querySelector('#total-price').innerText = totalPrice.toFixed(2);
+    } else {
+        document.querySelector(".cart").innerHTML = '<p>Your cart is empty</p>';
+        document.getElementById( '#total-price' );('total-price').innerText = '₱ 0';
+    }
+});
+
+function resetCart() {
+    localStorage.removeItem('admincart');
+    document.querySelector(".cart").innerHTML = '<p>Your cart is empty</p>';
+    document.querySelector('#total-price').innerText = '0.00';
+    alert('Cart has been reset');
+}
+
+
+document.querySelector(".shpcart").addEventListener("click", () => {
+    const cart = document.querySelector('.side');
+    cart.style.display = "block";
+});
+document.querySelector(".close").addEventListener("click", () => {
+    const cart = document.querySelector('.side');
+    cart.style.display = "none";
+});
+     
+
+    </script>
+</body>
+</html>
